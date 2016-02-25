@@ -1,5 +1,5 @@
 # ampm_micro_file_system
- A micro file system module for small embedded systems like FatFs.
+A micro file system architecture for small embedded systems like FatFs.
 File Access:
 ff_open - Open/Create a file,
 ff_close - Close an open file,
