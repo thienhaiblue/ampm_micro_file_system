@@ -1,0 +1,18 @@
+--cpu Cortex-M3
+".\flash\main.o"
+".\flash\tick.o"
+".\flash\stm32f10x_iwdg.o"
+".\flash\stm32f10x_gpio.o"
+".\flash\stm32f10x_rcc.o"
+".\flash\spi.o"
+".\flash\sys_tick.o"
+".\flash\core_cm3.o"
+".\flash\system_stm32f10x.o"
+".\flash\startup_stm32f10x_md.o"
+".\flash\ampm_ff.o"
+".\flash\sst25.o"
+".\flash\ampm_ff_port.o"
+--library_type=microlib --strict --scatter ".\flash\ampm_ff.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\ampm_ff.map" -o .\flash\ampm_ff.axf

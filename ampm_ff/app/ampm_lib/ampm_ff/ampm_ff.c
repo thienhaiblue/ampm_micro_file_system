@@ -185,7 +185,10 @@ AMPM_FRESULT  ampm_f_open(AMPM_FIL *fil,char  *fileName,uint8_t mode)
 					ampm_flash_read(AMPM_FLASH_START_ADDR + fil->start_sector*AMPM_FLASH_SECTOR_SIZE + 2*sizeof(AMPM_FIL),(uint8_t *)fil,sizeof(AMPM_FIL));
 					if(_ampm_f_file_format_check(fil) == FR_OK)
 					{
-						fil->permission = AMPM_FA_READ;
+						if(mode & AMPM_FA_WRITE)
+							fil->permission = AMPM_FA_WRITE;
+						else
+							fil->permission = AMPM_FA_READ;
 						fil->file_offset = 0;
 						AMPM_FF_DBG("success\r\n");
 						return FR_OK;
@@ -555,7 +558,7 @@ AMPM_FRESULT  ampm_f_printf(AMPM_FIL *fil,const uint8_t *format, ...)
 	{
 		len = 256;
 	}
-	return 0;ampm_f_write(fil,(char *)buffer,len,&i);
+	return 0;//ampm_f_write(fil,(char *)buffer,len,&i);
 }
 
 

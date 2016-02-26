@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\AMPM\GIT\ampm_micro_file_system\ampm_ff\app\build\keil\bt1.uvproj
+Project File Date:  02/25/2016
+
+<h2>Output:</h2>
+Build target 'AMPM_FF'
+compiling main.c...
+..\..\src\main.c(134): warning:  #223-D: function "strlen" declared implicitly
+                        ampm_f_write(&fil,(char *)ca_cert,strlen(ca_cert),&i);
+..\..\src\main.c(146): warning:  #223-D: function "strlen" declared implicitly
+                        ampm_fwrite_win32((char *)server_cert,strlen(server_cert),1,fil_win32);
+..\..\src\main.c(157): warning:  #223-D: function "strlen" declared implicitly
+                        ampm_f_write(&fil,(char *)server_key,strlen(server_key),&i);
+..\..\src\main.c(114): warning:  #177-D: variable "j" was declared but never referenced
+        uint32_t i,j,len;
+..\..\src\main.c(114): warning:  #177-D: variable "len" was declared but never referenced
+        uint32_t i,j,len;
+..\..\src\main.c(115): warning:  #177-D: variable "buf" was declared but never referenced
+        uint8_t buf[32];
+..\..\src\main.c(170): warning:  #111-D: statement is unreachable
+        return 0;
+..\..\src\main.c: 7 warnings, 0 errors
+linking...
+Program Size: Code=7064 RO-data=4900 RW-data=76 ZI-data=4356  
+FromELF: creating hex file...
+After Build - User command #1: fromelf --bin --output .\output\ampm_ff.bin .\flash\ampm_ff.axf
+".\flash\ampm_ff.axf" - 0 Error(s), 7 Warning(s).
+Load "E:\\AMPM\\GIT\\ampm_micro_file_system\\ampm_ff\\app\\build\\keil\\flash\\ampm_ff.axf" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+ed
+Load "E:\\AMPM\\GIT\\ampm_micro_file_system\\ampm_ff\\app\\build\\keil\\flash\\ampm_ff.axf" 
+Full Chip Erase Done.
+Programming Done.
+Verify OK.

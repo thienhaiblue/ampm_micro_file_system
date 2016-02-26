@@ -6,7 +6,7 @@
 #include <stm32f10x.h>
 
 #include "ampm_ff/ampm_ff.h"
-
+#include "ampm_ff/ampm_ff_port.h"
 
 const char *ca_cert = "\
 	-----BEGIN CERTIFICATE-----\n\
@@ -110,6 +110,7 @@ void HardFault_Handler(void)
 void SysInit(void)
 {
 	AMPM_FIL fil;
+	AMPM_FIL *fil_win32;
 	uint32_t i,j,len;
 	uint8_t buf[32];
 	//AMPM_FIL fsFile;
@@ -123,6 +124,8 @@ void SysInit(void)
 								);   
 	AFIO->MAPR = AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
 	ampm_f_init();
+	//ampm_f_disk_format();
+	//FATFS
 	if(ampm_f_open(&fil,"ca-cert.pem",AMPM_FA_READ) != FR_OK)
 	{
 		ampm_f_close(&fil);
@@ -132,15 +135,20 @@ void SysInit(void)
 		}
 	}
 	ampm_f_close(&fil);
-	if(ampm_f_open(&fil,"server-cert.pem",AMPM_FA_READ) != FR_OK)
+	//WIN32
+	fil_win32 = ampm_fopen_win32("server-cert.pem","r");
+	if(fil_win32 == NULL)
 	{
-		ampm_f_close(&fil);
-		if(ampm_f_open(&fil,"server-cert.pem",AMPM_FA_CREATE_ALWAYS) == FR_OK)
+		ampm_fclose_win32(fil_win32);
+		fil_win32 = ampm_fopen_win32("server-cert.pem","w");
+		if(fil_win32)
 		{
-			ampm_f_write(&fil,(char *)server_cert,strlen(server_cert),&i);
+			ampm_fwrite_win32((char *)server_cert,strlen(server_cert),1,fil_win32);
 		}
 	}
-	ampm_f_close(&fil);
+	ampm_fclose_win32(fil_win32);
+	
+	
 	if(ampm_f_open(&fil,"server-key.pem",AMPM_FA_READ) != FR_OK)
 	{
 		ampm_f_close(&fil);
